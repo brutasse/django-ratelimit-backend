@@ -1,0 +1,4 @@
+include README.rst LICENCE
+recursive-include docs *
+recursive-exclude docs/_build *
+global-exclude *.pyc
