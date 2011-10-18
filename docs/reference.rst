@@ -28,6 +28,42 @@ Authentication backends
 
     Number of login attempts to allow during ``minutes``. Defaults to ``30``.
 
+.. method:: RateLimitMixin.authenticate(username, password, request)
+
+    Tries to ``authenticate(username, password)`` on the parent backend and
+    use the request for rate-limiting.
+
+.. method:: RateLimitMixin.get_counters(request)
+
+    Fetches the previous failed login attempts from the cache. There is one
+    cache key per minute slot.
+
+.. method:: RateLimitMixin.keys_to_check(request)
+
+    Returns the list of keys to try to fetch from the cache for previous login
+    attempts. For a 5-minute limit, this returns the 5 relevant cache keys.
+
+.. method:: RateLimitMixin.get_cache_key(request)
+
+    Returns the cache key for the current time. This is the key to increment
+    if the login attempt has failed.
+
+.. method:: RateLimitMixin.key(request, dt)
+
+    Derives a cache key from the request and a datetime object. The datetime
+    object can be present (for the current request) or past (for the previous
+    cache keys).
+
+.. method:: RateLimitMixin.cache_incr(key)
+
+    Performs an increment operation on ``key``. The implementation is **not**
+    atomic. If you have a cache backend that supports atomic increment
+    operations, you're advised to override this method.
+
+.. method:: RateLimitMixin.expire_after()
+
+    Returns the cache timeout for keys.
+
 .. class:: RateLimitModelBackend
 
     A rate-limited version of ``django.contrib.auth.backends.ModelBackend``.
@@ -44,6 +80,7 @@ Exceptions
 ``````````
 
 .. module:: ratelimitbackend.exceptions
+   :synopsis: Exceptions thrown when the limit is reached.
 
 .. class:: RateLimitException
 
@@ -67,6 +104,7 @@ Admin
 `````
 
 .. module:: ratelimitbackend.admin
+   :synopsis: The admin site with rate limits.
 
 .. class:: RateLimitAdminSite
 
