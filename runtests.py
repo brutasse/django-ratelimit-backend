@@ -85,3 +85,8 @@ def runtests(*test_args):
 
 if __name__ == '__main__':
     runtests('ratelimitbackend')
+
+DIRECTORIES = (
+    ('ratelimitbackend', 'python runtests.py'),
+    ('docs', 'cd docs && make html'),
+)
