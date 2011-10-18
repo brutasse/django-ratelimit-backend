@@ -4,6 +4,7 @@ from django.contrib.admin.forms import (
 )
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm as AuthForm
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 
