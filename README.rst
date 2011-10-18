@@ -17,6 +17,8 @@ The numbers (30 attempts, 5 minutes) can be customized.
 
 * Documentation: http://django-ratelimit-backend.rtfd.org
 
+* Code: https://github.com/brutasse/django-ratelimit-backend
+
 Credits
 -------
 

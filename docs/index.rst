@@ -15,6 +15,10 @@ blocked.
    quickstart
    reference
 
+Get involved, submit issues and pull requests on the `code repository`_!
+
+.. _code repository: https://github.com/brutasse/django-ratelimit-backend
+
 Indices and tables
 ==================
 
