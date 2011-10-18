@@ -12,7 +12,7 @@ blocked.
 .. toctree::
    :maxdepth: 2
 
-   quickstart
+   usage
    reference
 
 Get involved, submit issues and pull requests on the `code repository`_!
