@@ -5,7 +5,8 @@ Rate-limit your login attempts at the authentication backend level. Login
 attempts are stored in the cache for 5 minutes and IPs with more than 30
 failed login attempts in the last 5 minutes are blocked.
 
-The numbers (30 attempts, 5 minutes) can be customized.
+The numbers (30 attempts, 5 minutes) as well as the blocking strategy can be
+customized.
 
 * Authors: Bruno Renié and `contributors`_
 

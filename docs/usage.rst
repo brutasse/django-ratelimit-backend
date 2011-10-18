@@ -1,6 +1,16 @@
 Usage
 =====
 
+Installation
+------------
+
+::
+
+    pip install django-ratelimit-backend
+
+There's nothing to add to your ``INSTALLED_APPS``, unless you want to run the
+tests. In which case, add ``'ratelimitbackend'``.
+
 Quickstart
 ----------
 
@@ -66,7 +76,7 @@ rate-limiting you can subclass the backend and implement your own logic.
 Let's see with an example: instead of checking the client's IP, we will use a
 combination of the IP *and* the tried username. This way after 30 failed
 attempts with one username, people can start brute-forcing a new username.
-Yay! More seriously, it can become useful if you have lots of user logging in
+Yay! More seriously, it can become useful if you have lots of users logging in
 at the same time from the same IP.
 
 While we're at it, we'll also allow 50 login attempts every 10 minutes.
