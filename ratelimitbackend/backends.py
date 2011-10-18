@@ -28,6 +28,12 @@ class RateLimitMixin(object):
                         "rate-limit. Username was '%s'" % username)
         user = super(RateLimitMixin, self).authenticate(username, password)
         if user is None and request is not None:
+            logger.info(
+                "Login failed: username '%s', IP '%s'" % (
+                    username,
+                    request.META['REMOTE_ADDR'],
+                )
+            )
             cache_key = self.get_cache_key(request)
             self.cache_incr(cache_key)
         return user

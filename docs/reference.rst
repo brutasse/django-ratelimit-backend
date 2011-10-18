@@ -139,3 +139,48 @@ Forms
     backend.
 
     .. _Django's authentication form: https://docs.djangoproject.com/en/dev/topics/auth/#django.contrib.auth.forms.AuthenticationForm
+
+Logging
+```````
+
+Failed attempts are logged using a logger named ``'ratelimitbackend'``. Here
+is an example for logging to the standard output:
+
+.. code-block:: python
+
+    LOGGING = {
+        'formatters': {
+            'simple': {
+                'format': '%(asctime)s %(levelname)s: %(message)s'
+            },
+            # other formatters
+        },
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+                'formatter': 'simple',
+            },
+            # other handlers
+        },
+        'loggers': {
+            'ratelimitbackend': {
+                'handlers': ['console'],
+                'level': 'INFO',
+            },
+            # other loggers
+        },
+    }
+
+You will see two kinds of messages:
+
+* "No request passed to the backend, unable to rate-limit. Username was…"
+
+  This means you're not using the app correctly, the request object wasn't
+  passed to the authentication backend. Double-check the documentation, and if
+  you make manual calls to login-related functions you may need to pass the
+  request object manually.
+
+* "Login failed: username 'foo', IP '127.0.0.1'"
+
+  This is a failed attempt that has been temporarily cached.
