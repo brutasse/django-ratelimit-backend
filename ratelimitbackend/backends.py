@@ -55,11 +55,7 @@ class RateLimitMixin(object):
         )
 
     def cache_incr(self, key):
-        try:
-            cache._cache.add(key, 0, time=self.expire_after())
-            cache._cache.incr(key)
-        except AttributeError:
-            cache.set(key, cache.get(key, 0) + 1, self.expire_after())
+        cache.set(key, cache.get(key, 0) + 1, self.expire_after())
 
     def expire_after(self):
         """Cache expiry delay"""
