@@ -2,8 +2,6 @@
 import os
 import sys
 
-import django
-
 from django.conf import settings
 try:
     from django.utils.functional import empty
@@ -33,9 +31,6 @@ def setup_test_environment():
         'django.middleware.csrf.CsrfViewMiddleware',
         'ratelimitbackend.middleware.RateLimitMiddleware',
     ]
-
-    if django.VERSION[:2] <= (1, 2):
-        middleware_classes.append('cbv.middleware.DeferredRenderingMiddleware')
 
     settings_dict = {
         "DATABASES": {
