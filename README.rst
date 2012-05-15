@@ -1,6 +1,8 @@
 Django-ratelimit-backend
 ------------------------
 
+.. image:: https://secure.travis-ci.org/brutasse/django-ratelimit-backend.png
+
 Rate-limit your login attempts at the authentication backend level. Login
 attempts are stored in the cache for 5 minutes and IPs with more than 30
 failed login attempts in the last 5 minutes are blocked.
