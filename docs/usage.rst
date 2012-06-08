@@ -110,3 +110,25 @@ cache key. Be careful.
 
 For all the details about the rate-limiting implementation, see the
 :ref:`backend referece <backends>`.
+
+Using with other backends
+-------------------------
+
+.. _custom_backends:
+
+The way django-ratelimit-backend is implemented requires the authentication
+backends  to have an authenticate method with 3 arguments (username, password,
+request) instead of only two.
+
+While django-ratelimit-backend works fine with the default ModelBackend by
+providing a replacement class, it's obviously not possible to do that for every
+single backend.
+
+The way to deal with this is to create a custom class using the
+"RateLimitMixin" class before registering the backend in the settings. For
+instance, for the LdapAuthBackend, it would be something like this::
+
+    class RateLimitedLdapAuthBackend(RateLimitMixin, LdapAuthBackend):
+        pass
+
+    AUTHENTICATE_BACKENDS = (RateLimitedLdapAuthBackend, )

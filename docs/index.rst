@@ -9,6 +9,12 @@ By default, it blocks any IP that has more than 30 failed login attempts in
 the past 5 minutes. The IP can still browse your site, only login attempts are
 blocked.
 
+.. note::
+
+    Using custom authentication backends needs you to do an additional
+    configuration step in your settings. Check :ref:`custom backends
+    <custom_backends>`.
+
 .. toctree::
    :maxdepth: 2
 
