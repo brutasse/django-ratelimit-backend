@@ -117,19 +117,26 @@ Using with other backends
 .. _custom_backends:
 
 The way django-ratelimit-backend is implemented requires the authentication
-backends  to have an authenticate method with 3 arguments (username, password,
-request) instead of only two.
+backends to have an ``authenticate()`` method with 3 arguments (``username``,
+``password``, ``request``) instead of only two.
 
-While django-ratelimit-backend works fine with the default ModelBackend by
+While django-ratelimit-backend works fine with the default ``ModelBackend`` by
 providing a replacement class, it's obviously not possible to do that for every
 single backend.
 
 The way to deal with this is to create a custom class using the
-"RateLimitMixin" class before registering the backend in the settings. For
-instance, for the LdapAuthBackend, it would be something like this::
+``RateLimitMixin`` class before registering the backend in your settings. For
+instance, for the LdapAuthBackend::
 
     from django_auth_ldap.backend import LDAPBackend
     from ratelimitbackend.backends import RateLimitMixin
-    class RateLimitedLDAPBackend(RateLimitMixin, LDAPBackend): pass
 
-    AUTHENTICATION_BACKENDS = ('path.to.settings.RateLimitedLDAPBackend',)
+    class RateLimitedLDAPBackend(RateLimitMixin, LDAPBackend):
+        pass
+
+    AUTHENTICATION_BACKENDS = (
+        'path.to.settings.RateLimitedLDAPBackend',
+    )
+
+``RateLimitMixin`` lets you simply add rate-limiting capabilities to any
+authentication backend.

@@ -11,9 +11,9 @@ blocked.
 
 .. note::
 
-    Using custom authentication backends needs you to do an additional
-    configuration step in your settings. Check :ref:`custom backends
-    <custom_backends>`.
+    If you use a custom authentication backend, there is an additional
+    configuration step. Check the :ref:`custom backends <custom_backends>`
+    section.
 
 .. toctree::
    :maxdepth: 2
