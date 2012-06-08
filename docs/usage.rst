@@ -109,4 +109,4 @@ Note that we're not sanitizing anything, so we may end up with a rather long
 cache key. Be careful.
 
 For all the details about the rate-limiting implementation, see the
-:ref:`backend referece <backends>`.
+:ref:`backend reference <backends>`.
