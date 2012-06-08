@@ -128,7 +128,8 @@ The way to deal with this is to create a custom class using the
 "RateLimitMixin" class before registering the backend in the settings. For
 instance, for the LdapAuthBackend, it would be something like this::
 
-    class RateLimitedLdapAuthBackend(RateLimitMixin, LdapAuthBackend):
-        pass
+    from django_auth_ldap.backend import LDAPBackend
+    from ratelimitbackend.backends import RateLimitMixin
+    class RateLimitedLDAPBackend(RateLimitMixin, LDAPBackend): pass
 
-    AUTHENTICATE_BACKENDS = (RateLimitedLdapAuthBackend, )
+    AUTHENTICATION_BACKENDS = ('path.to.settings.RateLimitedLDAPBackend',)
