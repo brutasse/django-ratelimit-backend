@@ -219,6 +219,17 @@ You will see two kinds of messages:
   you make manual calls to login-related functions you may need to pass the
   request object manually.
 
-* "Login failed: username 'foo', IP '127.0.0.1'"
+  The log level for this message is: ``WARNING``.
+
+* "Login failed: username 'foo', IP 127.0.0.1"
 
   This is a failed attempt that has been temporarily cached.
+
+  The log level for this message is: ``INFO``.
+
+* "Login rate-limit reached: username 'foo', IP 127.0.0.1"
+
+  This means someone has used all his quotas and got a
+  ``RateLimitException``, locking him temporarily until the quota decreases.
+
+  The log level for this message is: ``WARNING``.
