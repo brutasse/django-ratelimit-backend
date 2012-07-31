@@ -25,6 +25,13 @@ Get involved, submit issues and pull requests on the `code repository`_!
 
 .. _code repository: https://github.com/brutasse/django-ratelimit-backend
 
+Changes
+-------
+
+* 0.2: added a logging call when a user reaches its rate-limit.
+
+* 0.1: initial version.
+
 Indices and tables
 ==================
 
