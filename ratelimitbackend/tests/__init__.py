@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -22,7 +24,7 @@ class RateLimitTests(TestCase):
         self.assertContains(response, 'password')
 
         wrong_data = {
-            'username': 'hi',
+            'username': u'hï',
             'password': 'suspicious attempt',
         }
         # 30 failing attempts are allowed
@@ -44,7 +46,7 @@ class RateLimitTests(TestCase):
         response = self.client.get(url)
         self.assertContains(response, 'username')
         wrong_data = {
-            'username': 'hi',
+            'username': u'hî',
             'password': 'suspicious attempt',
         }
         # 30 failing attempts are allowed
@@ -64,7 +66,7 @@ class RateLimitTests(TestCase):
         )
 
         wrong_data = {
-            'username': 'user1',
+            'username': u'ùser1',
             'password': 'suspicious attempt',
         }
         # 50 failing attempts are allowed
