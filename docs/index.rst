@@ -28,6 +28,10 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* 0.3: removed the part where the admin login form looked up a User object when
+  an email was used to login. This brings support for Django 1.5's swappable
+  user models.
+
 * 0.2: added a logging call when a user reaches its rate-limit.
 
 * 0.1: initial version.

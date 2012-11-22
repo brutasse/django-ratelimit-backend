@@ -39,19 +39,6 @@ class AdminAuthenticationForm(AdminAuthForm):
                                            password=password,
                                            request=self.request)
             if self.user_cache is None:
-                if u'@' in username:
-                    # Mistakenly entered e-mail address instead of username?
-                    # Look it up.
-                    try:
-                        user = User.objects.get(email=username)
-                    except (User.DoesNotExist, User.MultipleObjectsReturned):
-                        # Nothing to do here, moving along.
-                        pass
-                    else:
-                        if user.check_password(password):
-                            message = _(
-                                "Your e-mail address is not your username."
-                                " Try '%s' instead.") % user.username
                 raise forms.ValidationError(message)
             elif not self.user_cache.is_active or not self.user_cache.is_staff:
                 raise forms.ValidationError(message)

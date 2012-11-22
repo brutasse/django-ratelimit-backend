@@ -21,6 +21,7 @@ def setup_test_environment():
         'django.contrib.admin',
         'django.contrib.messages',
         'ratelimitbackend',
+        'ratelimitbackend.tests',
     ]
 
     middleware_classes = [
@@ -44,7 +45,7 @@ def setup_test_environment():
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             },
         },
-        "ROOT_URLCONF": "",
+        "ROOT_URLCONF": "ratelimitbackend.tests.urls",
         "MIDDLEWARE_CLASSES": middleware_classes,
         "INSTALLED_APPS": apps,
         "SITE_ID": 1,
