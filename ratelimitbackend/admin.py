@@ -1,4 +1,4 @@
-from django.contrib.admin import *
+from django.contrib.admin import *  # noqa
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.utils.translation import ugettext as _
 
