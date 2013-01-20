@@ -28,6 +28,12 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* 0.4: automatically re-register models which have been registered in Django's
+  default admin site instance. There is no need to register 3rd-party models
+  anymore.
+
+  Fixed a couple of deprecation warnings.
+
 * 0.3: removed the part where the admin login form looked up a User object when
   an email was used to login. This brings support for Django 1.5's swappable
   user models.

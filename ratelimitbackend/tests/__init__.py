@@ -117,6 +117,17 @@ class RateLimitTests(TestCase):
         response = self.client.post(url, wrong_data)
         self.assertRateLimited(response)
 
+    def test_django_registry(self):
+        user = User.objects.create_user('username', 'foo@bar.com', 'pass')
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+        self.client.login(request=None, username='username', password='pass')
+        url = reverse('admin:index')
+        response = self.client.get(url)
+        self.assertContains(response, 'in the Auth application')
+        self.assertContains(response, '"/admin/auth/user/add/"')
+
     def test_custom_ratelimit_logic(self):
         """Custom backend behaviour"""
         url = reverse('login')

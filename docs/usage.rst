@@ -86,7 +86,6 @@ To do this, simply subclass
 
 .. code-block:: python
 
-
     from ratelimitbackend.backends import RateLimitModelBackend
 
     class MyBackend(RateLimitModelBackend):
