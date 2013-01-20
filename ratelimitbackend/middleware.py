@@ -11,5 +11,5 @@ class RateLimitMiddleware(object):
         if isinstance(exception, RateLimitException):
             return HttpResponseForbidden(
                 'Too many failed login attempts. Try again later.',
-                mimetype='text/plain',
+                content_type='text/plain',
             )
