@@ -18,7 +18,7 @@ customized.
 
 * Licence: BSD
 
-* Compatibility: Django 1.3 and greater
+* Compatibility: Django 1.4 and greater
 
 * Documentation: http://django-ratelimit-backend.rtfd.org
 
