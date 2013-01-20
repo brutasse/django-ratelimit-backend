@@ -1,5 +1,6 @@
 from django.contrib.admin import *  # noqa
-from django.contrib.admin import site as django_site
+from django.contrib.admin import (site as django_site,
+                                  autodiscover as django_autodiscover)
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.utils.translation import ugettext as _
 
@@ -27,7 +28,8 @@ class RateLimitAdminSite(AdminSite):
         return login(request, **defaults)
 site = RateLimitAdminSite()
 
-autodiscover()
-for model, modeladmin in django_site._registry.items():
-    if not model in site._registry:
-        site.register(model, modeladmin.__class__)
+def autodiscover():
+    django_autodiscover()
+    for model, modeladmin in django_site._registry.items():
+        if not model in site._registry:
+            site.register(model, modeladmin.__class__)
