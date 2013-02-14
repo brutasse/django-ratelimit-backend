@@ -28,19 +28,27 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
-* 0.4: automatically re-register models which have been registered in Django's
-  default admin site instance. There is no need to register 3rd-party models
-  anymore.
+* **0.5**:
+
+  Python 3 compatibility.
+
+  The backend now issues a warning (``warnings.warn()``) instead of a logging
+  call when no request is passed to the backend. This is because such cases
+  are developer errors so a warning is more appropriate.
+
+* **0.4**: automatically re-register models which have been registered in
+  Django's default admin site instance. There is no need to register 3rd-party
+  models anymore.
 
   Fixed a couple of deprecation warnings.
 
-* 0.3: removed the part where the admin login form looked up a User object when
-  an email was used to login. This brings support for Django 1.5's swappable
-  user models.
+* **0.3**: removed the part where the admin login form looked up a User object
+  when an email was used to login. This brings support for Django 1.5's
+  swappable user models.
 
-* 0.2: added a logging call when a user reaches its rate-limit.
+* **0.2**: added a logging call when a user reaches its rate-limit.
 
-* 0.1: initial version.
+* **0.1**: initial version.
 
 Indices and tables
 ==================
