@@ -1,4 +1,6 @@
 #-*- coding: utf-8 -*-
+import warnings
+
 import django
 
 from django.conf import settings
@@ -122,7 +124,10 @@ class RateLimitTests(TestCase):
         user.is_staff = True
         user.is_superuser = True
         user.save()
-        self.client.login(request=None, username='username', password='pass')
+        with warnings.catch_warnings(record=True) as w:
+            self.client.login(request=None, username='username',
+                              password='pass')
+            self.assertEqual(len(w), 1)
         url = reverse('admin:index')
         response = self.client.get(url)
         self.assertContains(response, 'in the Auth application')

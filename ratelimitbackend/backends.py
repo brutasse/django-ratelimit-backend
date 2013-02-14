@@ -1,4 +1,5 @@
 import logging
+import warnings
 
 from datetime import datetime, timedelta
 
@@ -29,8 +30,9 @@ class RateLimitMixin(object):
                 )
                 raise RateLimitException('Rate-limit reached', counts)
         else:
-            logger.warning(u"No request passed to the backend, unable to "
-                           u"rate-limit. Username was '%s'" % username)
+            warnings.warn(u"No request passed to the backend, unable to "
+                          u"rate-limit. Username was '%s'" % username,
+                          stacklevel=2)
         user = super(RateLimitMixin, self).authenticate(username, password)
         if user is None and request is not None:
             logger.info(
