@@ -40,7 +40,7 @@ class RateLimitTests(TestCase):
             'password': 'suspicious attempt',
         }
         # 30 failing attempts are allowed
-        for iteration in xrange(30):
+        for iteration in range(30):
             response = self.client.post(url, wrong_data)
             self.assertContains(response, 'username')
 
@@ -64,7 +64,7 @@ class RateLimitTests(TestCase):
             'password': 'suspicious attempt',
         }
         # 30 failing attempts are allowed
-        for iteration in xrange(30):
+        for iteration in range(30):
             response = self.client.post(url, wrong_data)
             self.assertContains(response, 'username')
 
@@ -90,7 +90,7 @@ class RateLimitTests(TestCase):
             'password': 'suspicious attempt',
         }
         # 30 failing attempts are allowed
-        for iteration in xrange(30):
+        for iteration in range(30):
             response = self.client.post(url, wrong_data)
             self.assertContains(response, 'username')
 
@@ -112,7 +112,7 @@ class RateLimitTests(TestCase):
             'password': 'suspicious attempt',
         }
         # 30 failing attempts are allowed
-        for iteration in xrange(30):
+        for iteration in range(30):
             response = self.client.post(url, wrong_data)
             self.assertContains(response, 'username')
 
@@ -146,7 +146,7 @@ class RateLimitTests(TestCase):
             'password': 'suspicious attempt',
         }
         # 50 failing attempts are allowed
-        for iteration in xrange(50):
+        for iteration in range(50):
             response = self.client.post(url, wrong_data)
             self.assertContains(response, 'username')
 

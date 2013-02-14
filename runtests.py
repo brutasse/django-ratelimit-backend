@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import logging
 import os
 import sys
 
@@ -7,6 +8,11 @@ try:
     from django.utils.functional import empty
 except ImportError:
     empty = None
+
+
+class NullHandler(logging.Handler):  # NullHandler isn't in Python 2.6
+    def emit(self, record):
+        pass
 
 
 def setup_test_environment():
@@ -52,6 +58,19 @@ def setup_test_environment():
         "AUTHENTICATION_BACKENDS": (
             'ratelimitbackend.backends.RateLimitModelBackend',
         ),
+        "LOGGING": {
+            'version': 1,
+            'handlers': {
+                'null': {
+                    'class': 'runtests.NullHandler',
+                }
+            },
+            'loggers': {
+                'ratelimitbackend': {
+                    'handlers': ['null'],
+                },
+            },
+        },
     }
 
     # set up settings for running tests for all apps

@@ -1,4 +1,7 @@
-import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:  # Python2
+    from urlparse import urlparse
 
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login
@@ -25,7 +28,7 @@ def login(request, template_name='registration/login.html',
     if request.method == "POST":
         form = authentication_form(data=request.POST, request=request)
         if form.is_valid():
-            netloc = urlparse.urlparse(redirect_to)[1]
+            netloc = urlparse(redirect_to)[1]
 
             # Use default setting if redirect_to is empty
             if not redirect_to:
