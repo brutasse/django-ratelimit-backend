@@ -1,7 +1,7 @@
 try:
     from urllib.parse import urlparse
 except ImportError:  # Python2
-    from urlparse import urlparse
+    from urlparse import urlparse  # noqa
 
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login

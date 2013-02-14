@@ -28,6 +28,7 @@ class RateLimitAdminSite(AdminSite):
         return login(request, **defaults)
 site = RateLimitAdminSite()
 
+
 def autodiscover():
     django_autodiscover()
     for model, modeladmin in django_site._registry.items():
