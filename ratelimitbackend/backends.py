@@ -18,8 +18,11 @@ class RateLimitMixin(object):
     cache_prefix = 'ratelimitbackend-'
     minutes = 5
     requests = 30
+    username_key = 'username'
 
-    def authenticate(self, username=None, password=None, request=None):
+    def authenticate(self, **kwargs):
+        request = kwargs.pop('request', None)
+        username = kwargs.get(self.username_key)
         if request is not None:
             counts = self.get_counters(request)
             if sum(counts.values()) >= self.requests:
@@ -33,7 +36,7 @@ class RateLimitMixin(object):
             warnings.warn(u"No request passed to the backend, unable to "
                           u"rate-limit. Username was '%s'" % username,
                           stacklevel=2)
-        user = super(RateLimitMixin, self).authenticate(username, password)
+        user = super(RateLimitMixin, self).authenticate(**kwargs)
         if user is None and request is not None:
             logger.info(
                 u"Login failed: username '{0}', IP {1}".format(
