@@ -160,3 +160,30 @@ class RateLimitTests(TestCase):
         self.assertContains(response, 'username')
 
         settings.AUTHENTICATION_BACKENDS = old_backends
+
+    @override_settings(AUTHENTICATION_BACKENDS=(
+        'ratelimitbackend.tests.backends.TestCustomBackend',))
+    def test_custom_backend(self):
+        """Backend with custom authentication method"""
+        url = reverse('custom_login')
+        response = self.client.get(url)
+        self.assertContains(response, 'token')
+        self.assertContains(response, 'secret')
+
+        wrong_data = {
+            'token': u'hï',
+            'secret': 'suspicious attempt',
+        }
+        # 30 failed attempts are allowed
+        for iteration in range(30):
+            response = self.client.post(url, wrong_data)
+        self.assertContains(response, 'secret')
+
+        response = self.client.post(url, wrong_data)
+        self.assertRateLimited(response)
+
+        # IP is rate-limited; even valid login attempts are blocked.
+        User.objects.create_user('foo', 'foo@bar.com', 'pass')
+        response = self.client.post(url, {'token': 'foo',
+                                          'secret': 'pass'})
+        self.assertRateLimited(response)
