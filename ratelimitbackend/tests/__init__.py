@@ -187,3 +187,14 @@ class RateLimitTests(TestCase):
         response = self.client.post(url, {'token': 'foo',
                                           'secret': 'pass'})
         self.assertRateLimited(response)
+
+    @override_settings(AUTHENTICATION_BACKENDS=(
+        'ratelimitbackend.tests.backends.TestCustomBrokenBackend',))
+    def test_custom_backend_no_username_key(self):
+        """Custom backend with missing username_key"""
+        url = reverse('custom_login')
+        wrong_data = {
+            'token': u'hï',
+            'secret': 'suspicious attempt',
+        }
+        self.assertRaises(KeyError, self.client.post, url, wrong_data)

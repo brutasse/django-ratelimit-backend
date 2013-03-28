@@ -30,3 +30,8 @@ class CustomBackend(ModelBackend):
 
 class TestCustomBackend(RateLimitMixin, CustomBackend):
     """Rate-limited backend with token/secret instead of username/password"""
+    username_key = 'token'
+
+
+class TestCustomBrokenBackend(RateLimitMixin, CustomBackend):
+    """Rate-limited backend with token/secret instead of username/password"""
