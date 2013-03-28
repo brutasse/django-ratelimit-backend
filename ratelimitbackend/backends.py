@@ -22,7 +22,7 @@ class RateLimitMixin(object):
 
     def authenticate(self, **kwargs):
         request = kwargs.pop('request', None)
-        username = kwargs.get(self.username_key)
+        username = kwargs[self.username_key]
         if request is not None:
             counts = self.get_counters(request)
             if sum(counts.values()) >= self.requests:
