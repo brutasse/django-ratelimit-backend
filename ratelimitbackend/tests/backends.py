@@ -1,4 +1,7 @@
-from ..backends import RateLimitModelBackend
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.models import User
+
+from ..backends import RateLimitMixin, RateLimitModelBackend
 
 
 class TestBackend(RateLimitModelBackend):
@@ -13,3 +16,22 @@ class TestBackend(RateLimitModelBackend):
             request.POST['username'],
             dt.strftime('%Y%m%d%H%M'),
         )
+
+
+class CustomBackend(ModelBackend):
+    def authenticate(self, token=None, secret=None):
+        try:
+            user = User.objects.get(username=token)
+            if user.check_password(secret):
+                return user
+        except User.DoesNotExist:
+            return None
+
+
+class TestCustomBackend(RateLimitMixin, CustomBackend):
+    """Rate-limited backend with token/secret instead of username/password"""
+    username_key = 'token'
+
+
+class TestCustomBrokenBackend(RateLimitMixin, CustomBackend):
+    """Rate-limited backend with token/secret instead of username/password"""
