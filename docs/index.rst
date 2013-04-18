@@ -28,6 +28,11 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **0.6**:
+
+  The ``RatelimitBackend`` now allows arbitrary ``kwargs`` for authentication,
+  not just ``username`` and ``password``. Patch by Trey Hunner.
+
 * **0.5**:
 
   Python 3 compatibility.

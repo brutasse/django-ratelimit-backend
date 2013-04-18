@@ -116,8 +116,8 @@ Using with other backends
 .. _custom_backends:
 
 The way django-ratelimit-backend is implemented requires the authentication
-backends to have an ``authenticate()`` method with 3 arguments (``username``,
-``password``, ``request``) instead of only two.
+backends to have an ``authenticate()`` that thakes an additional ``request``
+keyword argument.
 
 While django-ratelimit-backend works fine with the default ``ModelBackend`` by
 providing a replacement class, it's obviously not possible to do that for every
@@ -139,3 +139,16 @@ instance, for the LdapAuthBackend::
 
 ``RateLimitMixin`` lets you simply add rate-limiting capabilities to any
 authentication backend.
+
+``RateLimitMixin`` throws a warning when no request is passed to its
+``authenticate()`` method. This warning also contains the username that was
+passed. If you use an authentication backend that doesn't take the traditional
+``username`` and ``password`` arguments, set the ``username_key`` attribute on the backend class to the proper keyword argument name. For instance, if your
+backend authenticates with an ``email``::
+
+    class CustomBackend(BaseBackend):
+        def authenticate(self, email, password):
+            ...
+
+    class RateLimitedLCustomBackend(RateLimitMixin, CustomBackend):
+        username_key = 'email'
