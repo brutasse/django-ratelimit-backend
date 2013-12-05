@@ -29,7 +29,7 @@ Credits
 
 * Simon Willison for his `ratelimitcache`_ idea
 
-  .. _ratelimitcache: http://simonwillison.net/2009/jan/7/ratelimitcache/
+  .. _ratelimitcache: http://blog.simonwillison.net/post/57956846132/ratelimitcache
 
 Hacking
 -------
