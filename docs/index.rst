@@ -28,7 +28,11 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
-* **0.6**:
+* **0.6.1**:
+
+  * Removed calls to deprecated ``check_test_cookie()``.
+
+* **0.6** (2013-04-18):
 
   The ``RatelimitBackend`` now allows arbitrary ``kwargs`` for authentication,
   not just ``username`` and ``password``. Patch by Trey Hunner.
