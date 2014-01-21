@@ -23,7 +23,6 @@ class AuthenticationForm(AuthForm):
                 )
             elif not self.user_cache.is_active:
                 raise forms.ValidationError(_('This account is inactive.'))
-        self.check_for_test_cookie()
         return self.cleaned_data
 
 
@@ -41,5 +40,4 @@ class AdminAuthenticationForm(AdminAuthForm):
                 raise forms.ValidationError(message)
             elif not self.user_cache.is_active or not self.user_cache.is_staff:
                 raise forms.ValidationError(message)
-        self.check_for_test_cookie()
         return self.cleaned_data
