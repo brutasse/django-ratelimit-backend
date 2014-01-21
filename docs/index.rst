@@ -33,27 +33,35 @@ Changes
   The ``RatelimitBackend`` now allows arbitrary ``kwargs`` for authentication,
   not just ``username`` and ``password``. Patch by Trey Hunner.
 
-* **0.5**:
+* **0.5** (2013-02-14):
 
-  Python 3 compatibility.
+  * Python 3 compatibility.
 
-  The backend now issues a warning (``warnings.warn()``) instead of a logging
-  call when no request is passed to the backend. This is because such cases
-  are developer errors so a warning is more appropriate.
+  * The backend now issues a warning (``warnings.warn()``) instead of a logging
+    call when no request is passed to the backend. This is because such cases
+    are developer errors so a warning is more appropriate.
 
-* **0.4**: automatically re-register models which have been registered in
-  Django's default admin site instance. There is no need to register 3rd-party
-  models anymore.
+* **0.4** (2013-01-20):
 
-  Fixed a couple of deprecation warnings.
+  * Automatically re-register models which have been registered in
+    Django's default admin site instance. There is no need to register
+    3rd-party models anymore.
 
-* **0.3**: removed the part where the admin login form looked up a User object
-  when an email was used to login. This brings support for Django 1.5's
-  swappable user models.
+  * Fixed a couple of deprecation warnings.
 
-* **0.2**: added a logging call when a user reaches its rate-limit.
+* **0.3** (2012-11-22):
 
-* **0.1**: initial version.
+  * Removed the part where the admin login form looked up a User object
+    when an email was used to login. This brings support for Django 1.5's
+    swappable user models.
+
+* **0.2** (2012-07-31):
+
+  * Added a logging call when a user reaches its rate-limit.
+
+* **0.1**:
+
+  * Initial version.
 
 Indices and tables
 ==================
