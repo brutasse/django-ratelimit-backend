@@ -27,8 +27,8 @@ Quickstart
 * Everytime you use ``django.contrib.auth.views.login``, use
   ``ratelimitbackend.views.login`` instead.
 
-* Whenever you use ``django.contrib.admin``, use ``ratelimitbackend.admin``
-  instead.
+* Register ratelimitbackend's admin URLs in your URLConf instead of the
+  default admin URLs.
 
   In your ``urls.py``:
 
@@ -42,15 +42,9 @@ Quickstart
           (r'^admin/', include(admin.site.urls)),
       )
 
-  In your apps' ``admin.py`` files:
-
-  .. code-block:: python
-
-      from ratelimitbackend import admin
-
-      from .models import SomeModel
-
-      admin.site.register(SomeModel)
+  Ratelimitbackend's admin site overrides the default admin login view to add
+  rate-limiting. You can keep registering your models to the default admin
+  site and they will show up in the ratelimitbackend-enabled admin.
 
 * Add ``'ratelimitbackend.middleware.RateLimitMiddleware'`` to your
   ``MIDDLEWARE_CLASSES``, or create you own middleware to handle rate limits.
