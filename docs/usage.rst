@@ -110,7 +110,7 @@ Using with other backends
 .. _custom_backends:
 
 The way django-ratelimit-backend is implemented requires the authentication
-backends to have an ``authenticate()`` that thakes an additional ``request``
+backends to have an ``authenticate()`` that takes an additional ``request``
 keyword argument.
 
 While django-ratelimit-backend works fine with the default ``ModelBackend`` by
