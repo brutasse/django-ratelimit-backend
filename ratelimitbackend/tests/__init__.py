@@ -105,7 +105,8 @@ class RateLimitTests(TestCase):
 
     def test_ratelimit_admin_logins(self):
         url = reverse('admin:index')
-        response = self.client.get(url)
+        response = self.client.get(url, follow=True)
+        login_url = response.request['PATH_INFO']
         self.assertContains(response, 'username')
         wrong_data = {
             'username': u'hî',
@@ -113,10 +114,11 @@ class RateLimitTests(TestCase):
         }
         # 30 failing attempts are allowed
         for iteration in range(30):
-            response = self.client.post(url, wrong_data)
+            response = self.client.post(login_url, wrong_data)
             self.assertContains(response, 'username')
+            self.assertContains(response, 'for a staff account')
 
-        response = self.client.post(url, wrong_data)
+        response = self.client.post(login_url, wrong_data)
         self.assertRateLimited(response)
 
     def test_django_registry(self):
@@ -130,7 +132,7 @@ class RateLimitTests(TestCase):
             self.assertEqual(len(w), 1)
         url = reverse('admin:index')
         response = self.client.get(url)
-        self.assertContains(response, 'in the Auth application')
+        self.assertContains(response, 'in the Auth')
         self.assertContains(response, '"/admin/auth/user/add/"')
 
     def test_custom_ratelimit_logic(self):
