@@ -75,6 +75,11 @@ def setup_test_environment():
 
     # set up settings for running tests for all apps
     settings.configure(**settings_dict)
+    try:
+        from django import setup
+        setup()  # Needed for Django>=1.7
+    except ImportError:
+        pass
 
 
 def runtests(*test_args):

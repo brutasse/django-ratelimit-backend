@@ -7,8 +7,11 @@ env:
   - TOXENV=py27-1.4
   - TOXENV=py27-1.5
   - TOXENV=py27-1.6
+  - TOXENV=py27-1.7
   - TOXENV=py33-1.5
   - TOXENV=py33-1.6
+  - TOXENV=py33-1.7
+  - TOXENV=py34-1.7
   - TOXENV=docs
 install:
   - pip install tox
