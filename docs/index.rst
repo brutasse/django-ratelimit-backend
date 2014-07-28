@@ -28,7 +28,11 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
-* **0.6.1**:
+* **0.6.2** (2014-07-28):
+
+  * Django 1.7 support. Patch by Mathieu Agopian.
+
+* **0.6.1** (2014-01-21):
 
   * Removed calls to deprecated ``check_test_cookie()``.
 
