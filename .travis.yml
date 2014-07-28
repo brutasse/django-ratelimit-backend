@@ -11,6 +11,8 @@ env:
   - TOXENV=py33-1.5
   - TOXENV=py33-1.6
   - TOXENV=py33-1.7
+  - TOXENV=py34-1.5
+  - TOXENV=py34-1.6
   - TOXENV=py34-1.7
   - TOXENV=docs
 install:
