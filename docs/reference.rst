@@ -54,6 +54,12 @@ Authentication backends
     object can be present (for the current request) or past (for the previous
     cache keys).
 
+.. method:: RateLimitMixin.get_ip(request)
+
+    Extracts the client IP address from the request. By defaults the IP is
+    read from request.META['REMOTE_ADDR'] but you can override this if you
+    have a proxy that uses a custom header such as ``X-Forwarded-For``.
+
 .. method:: RateLimitMixin.cache_incr(key)
 
     Performs an increment operation on ``key``. The implementation is **not**

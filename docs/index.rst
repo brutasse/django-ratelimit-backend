@@ -28,6 +28,10 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **0.6.3** (2015-02-12):
+
+  * Add ``RatelimitMixin.get_ip``.
+
 * **0.6.2** (2014-07-28):
 
   * Django 1.7 support. Patch by Mathieu Agopian.

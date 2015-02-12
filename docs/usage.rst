@@ -89,7 +89,7 @@ To do this, simply subclass
         def key(self, request, dt):
             return '%s%s-%s-%s' % (
                 self.cache_prefix,
-                request.META.get('REMOTE_ADDR', ''),
+                self.get_ip(request),
                 request.POST['username'],
                 dt.strftime('%Y%m%d%H%M'),
             )

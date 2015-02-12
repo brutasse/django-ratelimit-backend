@@ -28,7 +28,7 @@ class RateLimitMixin(object):
             if sum(counts.values()) >= self.requests:
                 logger.warning(
                     u"Login rate-limit reached: username '{0}', IP {1}".format(
-                        username, request.META['REMOTE_ADDR']
+                        username, self.get_ip(request),
                     )
                 )
                 raise RateLimitException('Rate-limit reached', counts)
@@ -41,7 +41,7 @@ class RateLimitMixin(object):
             logger.info(
                 u"Login failed: username '{0}', IP {1}".format(
                     username,
-                    request.META['REMOTE_ADDR'],
+                    self.get_ip(request),
                 )
             )
             cache_key = self.get_cache_key(request)
@@ -66,9 +66,12 @@ class RateLimitMixin(object):
     def key(self, request, dt):
         return '%s%s-%s' % (
             self.cache_prefix,
-            request.META.get('REMOTE_ADDR', ''),
+            self.get_ip(request),
             dt.strftime('%Y%m%d%H%M'),
         )
+
+    def get_ip(self, request):
+        return request.META['REMOTE_ADDR']
 
     def cache_incr(self, key):
         """
