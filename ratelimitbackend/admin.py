@@ -16,8 +16,10 @@ class RateLimitAdminSite(AdminSite):
         context = {
             'title': _('Log in'),
             'app_path': request.get_full_path(),
-            REDIRECT_FIELD_NAME: request.get_full_path(),
         }
+        if (REDIRECT_FIELD_NAME not in request.GET and
+                REDIRECT_FIELD_NAME not in request.POST):
+            context[REDIRECT_FIELD_NAME] = request.get_full_path()
         context.update(extra_context or {})
         defaults = {
             'extra_context': context,
