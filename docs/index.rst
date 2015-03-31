@@ -28,6 +28,11 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **0.6.4** (2015-03-31):
+
+  * Only set the redirect field to the value of ``request.get_full_path()`` if
+    the field does not already have a value. Patch by Michael Blatherwick.
+
 * **0.6.3** (2015-02-12):
 
   * Add ``RatelimitMixin.get_ip``.
