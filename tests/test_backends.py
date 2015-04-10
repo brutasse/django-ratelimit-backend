@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import warnings
 
 import django
@@ -18,12 +18,12 @@ except ImportError:
 
 
 class RateLimitTests(TestCase):
-    urls = 'ratelimitbackend.tests.urls'
+    urls = 'tests.urls'
 
-    def setUp(self):
+    def setUp(self):  # noqa
         cache.clear()
 
-    def assertRateLimited(self, response):
+    def assertRateLimited(self, response):  # noqa
         self.assertContains(response, 'Too many failed login attempts',
                             status_code=403)
 
@@ -140,7 +140,7 @@ class RateLimitTests(TestCase):
         url = reverse('login')
         old_backends = settings.AUTHENTICATION_BACKENDS
         settings.AUTHENTICATION_BACKENDS = (
-            'ratelimitbackend.tests.backends.TestBackend',
+            'tests.backends.TestBackend',
         )
 
         wrong_data = {
@@ -164,7 +164,7 @@ class RateLimitTests(TestCase):
         settings.AUTHENTICATION_BACKENDS = old_backends
 
     @override_settings(AUTHENTICATION_BACKENDS=(
-        'ratelimitbackend.tests.backends.TestCustomBackend',))
+        'tests.backends.TestCustomBackend',))
     def test_custom_backend(self):
         """Backend with custom authentication method"""
         url = reverse('custom_login')
@@ -191,7 +191,7 @@ class RateLimitTests(TestCase):
         self.assertRateLimited(response)
 
     @override_settings(AUTHENTICATION_BACKENDS=(
-        'ratelimitbackend.tests.backends.TestCustomBrokenBackend',))
+        'tests.backends.TestCustomBrokenBackend',))
     def test_custom_backend_no_username_key(self):
         """Custom backend with missing username_key"""
         url = reverse('custom_login')

@@ -1,7 +1,8 @@
 from django.conf.urls import include, patterns, url
 
-from .. import admin
-from ..views import login
+from ratelimitbackend import admin
+from ratelimitbackend.views import login
+
 from .forms import CustomAuthForm
 
 admin.autodiscover()

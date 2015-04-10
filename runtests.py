@@ -27,7 +27,7 @@ def setup_test_environment():
         'django.contrib.admin',
         'django.contrib.messages',
         'ratelimitbackend',
-        'ratelimitbackend.tests',
+        'tests',
     ]
 
     middleware_classes = [
@@ -51,7 +51,7 @@ def setup_test_environment():
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             },
         },
-        "ROOT_URLCONF": "ratelimitbackend.tests.urls",
+        "ROOT_URLCONF": "tests.urls",
         "MIDDLEWARE_CLASSES": middleware_classes,
         "INSTALLED_APPS": apps,
         "SITE_ID": 1,
@@ -77,36 +77,27 @@ def setup_test_environment():
     settings.configure(**settings_dict)
     try:
         from django import setup
-        setup()  # Needed for Django>=1.7
     except ImportError:
         pass
+    else:
+        setup()  # Needed for Django>=1.7
 
 
-def runtests(*test_args):
-    if not test_args:
-        test_args = ('ratelimitbackend',)
+def runtests():
     setup_test_environment()
 
     parent = os.path.dirname(os.path.abspath(__file__))
     sys.path.insert(0, parent)
     try:
-        from django.test.simple import DjangoTestSuiteRunner
-
-        def run_tests(test_args, verbosity, interactive):
-            runner = DjangoTestSuiteRunner(
-                verbosity=verbosity, interactive=interactive, failfast=False)
-            return runner.run_tests(test_args)
+        from django.test.runner import DiscoverRunner
+        print("got it from django.test.runner")
     except ImportError:
-        # for Django versions that don't have DjangoTestSuiteRunner
-        from django.test.simple import run_tests
-    failures = run_tests(test_args, verbosity=1, interactive=True)
+        from discover_runner.runner import DiscoverRunner
+
+    runner = DiscoverRunner(verbosity=1, interactive=True, failfast=False)
+    failures = runner.run_tests(())
     sys.exit(failures)
 
 
 if __name__ == '__main__':
-    runtests('ratelimitbackend')
-
-DIRECTORIES = (
-    ('ratelimitbackend', 'python runtests.py'),
-    ('docs', 'cd docs && make html'),
-)
+    runtests()

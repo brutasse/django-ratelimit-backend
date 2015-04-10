@@ -1,7 +1,7 @@
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 
-from ..backends import RateLimitMixin, RateLimitModelBackend
+from ratelimitbackend.backends import RateLimitMixin, RateLimitModelBackend
 
 
 class TestBackend(RateLimitModelBackend):
