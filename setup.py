@@ -3,6 +3,9 @@ from setuptools import setup, find_packages
 
 import ratelimitbackend
 
+with open('README.rst', 'r') as f:
+    long_description = f.read()
+
 
 setup(
     name='django-ratelimit-backend',
@@ -14,7 +17,7 @@ setup(
     url='https://github.com/brutasse/django-ratelimit-backend',
     license='BSD licence, see LICENCE file',
     description='Login rate-limiting at the auth backend level',
-    long_description=open('README.rst').read(),
+    long_description=long_description,
     install_requires=[
         'Django',
     ],
