@@ -90,7 +90,6 @@ def runtests():
     sys.path.insert(0, parent)
     try:
         from django.test.runner import DiscoverRunner
-        print("got it from django.test.runner")
     except ImportError:
         from discover_runner.runner import DiscoverRunner
 
