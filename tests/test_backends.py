@@ -9,7 +9,10 @@ from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.utils import override_settings
-from django.utils.unittest import skipIf
+try:
+    from unittest import skipIf
+except ImportError:
+    from django.utils.unittest import skipIf
 
 try:
     from django.contrib.auth import get_user_model
@@ -18,8 +21,6 @@ except ImportError:
 
 
 class RateLimitTests(TestCase):
-    urls = 'tests.urls'
-
     def setUp(self):  # noqa
         cache.clear()
 
