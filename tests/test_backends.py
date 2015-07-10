@@ -3,7 +3,6 @@ import warnings
 
 import django
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
