@@ -136,13 +136,10 @@ class RateLimitTests(TestCase):
         self.assertContains(response, 'in the Auth')
         self.assertContains(response, '"/admin/auth/user/add/"')
 
+    @override_settings(AUTHENTICATION_BACKENDS=('tests.backends.TestBackend',))
     def test_custom_ratelimit_logic(self):
         """Custom backend behaviour"""
         url = reverse('login')
-        old_backends = settings.AUTHENTICATION_BACKENDS
-        settings.AUTHENTICATION_BACKENDS = (
-            'tests.backends.TestBackend',
-        )
 
         wrong_data = {
             'username': u'ùser1',
@@ -161,8 +158,6 @@ class RateLimitTests(TestCase):
         wrong_data['username'] = 'user2'
         response = self.client.post(url, wrong_data)
         self.assertContains(response, 'username')
-
-        settings.AUTHENTICATION_BACKENDS = old_backends
 
     @override_settings(AUTHENTICATION_BACKENDS=(
         'tests.backends.TestCustomBackend',))
