@@ -28,6 +28,10 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **1.0** (2015-07-10):
+
+  * Silence warnings with Django 1.8.
+
 * **0.6.4** (2015-03-31):
 
   * Only set the redirect field to the value of ``request.get_full_path()`` if
