@@ -59,6 +59,9 @@ Quickstart
       if request.method == 'POST':
           form = AuthenticationForm(data=request.POST, request=request)
           # etc. etc.
+  
+  If you use ``django.contrib.auth.authenticate``, pass it the request object
+  as well.
 
 Customizing rate-limiting criteria
 ----------------------------------
