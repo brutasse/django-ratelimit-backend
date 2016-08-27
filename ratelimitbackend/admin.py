@@ -1,3 +1,5 @@
+# Allow transitive imports, e.g.
+# `from ratelimitbackend import admin; admin.ModelAdmin`
 from django.contrib.admin import *  # noqa
 from django.contrib.admin import (site as django_site,
                                   autodiscover as django_autodiscover)
