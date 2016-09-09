@@ -1,22 +1,12 @@
 # -*- coding: utf-8 -*-
 import warnings
 
-import django
-
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.utils import override_settings
-try:
-    from unittest import skipIf
-except ImportError:
-    from django.utils.unittest import skipIf
-
-try:
-    from django.contrib.auth import get_user_model
-except ImportError:
-    pass
 
 
 class RateLimitTests(TestCase):
@@ -28,7 +18,6 @@ class RateLimitTests(TestCase):
                             status_code=403)
 
     @override_settings(AUTH_USER_MODEL='tests.User')
-    @skipIf(django.VERSION[:2] < (1, 5), "Swappable user not available")
     def test_ratelimit_login_attempt_swapped_user(self):
         url = reverse('login')
         response = self.client.get(url)
@@ -78,7 +67,6 @@ class RateLimitTests(TestCase):
         self.assertRateLimited(response)
 
     @override_settings(AUTH_USER_MODEL='tests.User')
-    @skipIf(django.VERSION[:2] < (1, 5), "Swappable user not available")
     def test_ratelimit_login_attempt_swapped(self):
         url = reverse('login')
         response = self.client.get(url)

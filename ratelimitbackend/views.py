@@ -1,31 +1,14 @@
-try:
-    from urllib.parse import urlparse
-except ImportError:  # Python2
-    from urlparse import urlparse  # noqa
-
-import django
-
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login
-try:
-    from django.contrib.sites.shortcuts import get_current_site
-except ImportError:
-    from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect
-from django.template.response import TemplateResponse as BaseTemplateResponse
+from django.template.response import TemplateResponse
+from django.utils.six.moves.urllib.parse import urlparse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
 from .forms import AuthenticationForm
-
-
-class TemplateResponse(BaseTemplateResponse):
-    def __init__(self, request, template, context=None, **kwargs):
-        if django.VERSION < (1, 8):
-            kwargs['current_app'] = request.current_app
-        super(TemplateResponse, self).__init__(
-            request, template, context=context, **kwargs)
 
 
 @sensitive_post_parameters()
