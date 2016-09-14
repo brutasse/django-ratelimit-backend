@@ -28,6 +28,10 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **1.0.1** (TBA):
+
+  * Exclude tests from being installed from the wheel file.
+
 * **1.0** (2015-07-10):
 
   * Silence warnings with Django 1.8.
@@ -90,4 +94,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

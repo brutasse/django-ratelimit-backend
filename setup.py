@@ -12,7 +12,7 @@ setup(
     version=ratelimitbackend.__version__,
     author='Bruno Renié',
     author_email='bruno@renie.fr',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     include_package_data=True,
     url='https://github.com/brutasse/django-ratelimit-backend',
     license='BSD licence, see LICENCE file',
