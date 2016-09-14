@@ -38,9 +38,9 @@ Quickstart
 
       admin.autodiscover()
 
-      urlpatterns += patterns('',
+      urlpatterns += [
           (r'^admin/', include(admin.site.urls)),
-      )
+      ]
 
   Ratelimitbackend's admin site overrides the default admin login view to add
   rate-limiting. You can keep registering your models to the default admin
@@ -59,7 +59,7 @@ Quickstart
       if request.method == 'POST':
           form = AuthenticationForm(data=request.POST, request=request)
           # etc. etc.
-  
+
   If you use ``django.contrib.auth.authenticate``, pass it the request object
   as well.
 

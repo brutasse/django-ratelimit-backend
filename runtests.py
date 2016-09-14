@@ -1,18 +1,10 @@
 #!/usr/bin/env python
-import logging
 import os
 import sys
 
 from django.conf import settings
-try:
-    from django.utils.functional import empty
-except ImportError:
-    empty = None
-
-
-class NullHandler(logging.Handler):  # NullHandler isn't in Python 2.6
-    def emit(self, record):
-        pass
+from django.test.runner import DiscoverRunner
+from django.utils.functional import empty
 
 
 def setup_test_environment():
@@ -62,7 +54,7 @@ def setup_test_environment():
             'version': 1,
             'handlers': {
                 'null': {
-                    'class': 'runtests.NullHandler',
+                    'class': 'logging.NullHandler',
                 }
             },
             'loggers': {
@@ -86,12 +78,8 @@ def setup_test_environment():
 
     # set up settings for running tests for all apps
     settings.configure(**settings_dict)
-    try:
-        from django import setup
-    except ImportError:
-        pass
-    else:
-        setup()  # Needed for Django>=1.7
+    from django import setup
+    setup()
 
 
 def runtests():
@@ -99,10 +87,6 @@ def runtests():
 
     parent = os.path.dirname(os.path.abspath(__file__))
     sys.path.insert(0, parent)
-    try:
-        from django.test.runner import DiscoverRunner
-    except ImportError:
-        from discover_runner.runner import DiscoverRunner
 
     runner = DiscoverRunner(verbosity=1, interactive=True, failfast=False)
     failures = runner.run_tests(())
