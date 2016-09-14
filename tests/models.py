@@ -24,6 +24,7 @@ class UserManager(BaseUserManager):
                                                  'is_superuser'])
         return user
 
+
 class User(AbstractBaseUser):
     """A user with email as identifier"""
     USERNAME_FIELD = 'email'

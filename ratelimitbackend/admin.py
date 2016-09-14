@@ -8,7 +8,7 @@ from .forms import AdminAuthenticationForm
 from .views import login
 
 
-class RateLimitAdminSite(AdminSite):
+class RateLimitAdminSite(AdminSite):  # noqa
     def login(self, request, extra_context=None):
         """
         Displays the login form for the given HttpRequest.
