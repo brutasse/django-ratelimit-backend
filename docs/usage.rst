@@ -36,8 +36,6 @@ Quickstart
 
       from ratelimitbackend import admin
 
-      admin.autodiscover()
-
       urlpatterns += [
           (r'^admin/', include(admin.site.urls)),
       ]

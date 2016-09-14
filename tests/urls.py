@@ -5,8 +5,6 @@ from ratelimitbackend.views import login
 
 from .forms import CustomAuthForm
 
-admin.autodiscover()
-
 
 urlpatterns = [
     url(r'^login/$', login,

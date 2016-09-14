@@ -1,8 +1,7 @@
 # Allow transitive imports, e.g.
 # `from ratelimitbackend import admin; admin.ModelAdmin`
 from django.contrib.admin import *  # noqa
-from django.contrib.admin import (site as django_site,
-                                  autodiscover as django_autodiscover)
+from django.contrib.admin import site as django_site
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.utils.translation import ugettext as _
 
@@ -31,10 +30,3 @@ class RateLimitAdminSite(AdminSite):  # noqa
         }
         return login(request, **defaults)
 site = RateLimitAdminSite()
-
-
-def autodiscover():
-    django_autodiscover()
-    for model, modeladmin in django_site._registry.items():
-        if model not in site._registry:
-            site.register(model, modeladmin.__class__)
