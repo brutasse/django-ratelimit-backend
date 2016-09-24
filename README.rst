@@ -20,7 +20,7 @@ customized.
 
 * Compatibility: Django 1.4 and greater
 
-* Documentation: http://django-ratelimit-backend.rtfd.org
+* Documentation: https://django-ratelimit-backend.readthedocs.io
 
 * Code: https://github.com/brutasse/django-ratelimit-backend
 
