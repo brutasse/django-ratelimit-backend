@@ -28,9 +28,11 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
-* **1.0.1** (TBA):
+* **1.1** (TBA):
 
   * Exclude tests from being installed from the wheel file.
+
+  * Add support for Django 1.10.
 
 * **1.0** (2015-07-10):
 

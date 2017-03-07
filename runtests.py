@@ -2,6 +2,7 @@
 import os
 import sys
 
+import django
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from django.utils.functional import empty
@@ -44,7 +45,7 @@ def setup_test_environment():
             },
         },
         "ROOT_URLCONF": "tests.urls",
-        "MIDDLEWARE_CLASSES": middleware_classes,
+        "MIDDLEWARE": middleware_classes,
         "INSTALLED_APPS": apps,
         "SITE_ID": 1,
         "AUTHENTICATION_BACKENDS": (
@@ -75,6 +76,9 @@ def setup_test_environment():
             },
         }],
     }
+
+    if django.VERSION < (1, 10):
+        settings_dict["MIDDLEWARE_CLASSES"] = settings_dict["MIDDLEWARE"]
 
     # set up settings for running tests for all apps
     settings.configure(**settings_dict)
