@@ -30,6 +30,8 @@ class RateLimitAdminSite(AdminSite):  # noqa
             'template_name': self.login_template or 'admin/login.html',
         }
         return login(request, **defaults)
+
+
 site = RateLimitAdminSite()
 
 
