@@ -32,7 +32,7 @@ Changes
 
   * Exclude tests from being installed from the wheel file.
 
-  * Add support for Django 1.10.
+  * Add support for Django 1.10 and 1.11.
 
 * **1.0** (2015-07-10):
 

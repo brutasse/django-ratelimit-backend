@@ -20,8 +20,7 @@ class RateLimitMixin(object):
     requests = 30
     username_key = 'username'
 
-    def authenticate(self, **kwargs):
-        request = kwargs.pop('request', None)
+    def authenticate(self, request=None, **kwargs):
         username = kwargs[self.username_key]
         if request is not None:
             counts = self.get_counters(request)
@@ -36,7 +35,9 @@ class RateLimitMixin(object):
             warnings.warn(u"No request passed to the backend, unable to "
                           u"rate-limit. Username was '%s'" % username,
                           stacklevel=2)
-        user = super(RateLimitMixin, self).authenticate(**kwargs)
+        user = super(RateLimitMixin, self).authenticate(
+            request=request, **kwargs
+        )
         if user is None and request is not None:
             logger.info(
                 u"Login failed: username '{0}', IP {1}".format(
