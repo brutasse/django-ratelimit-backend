@@ -19,7 +19,7 @@ class TestBackend(RateLimitModelBackend):
 
 
 class CustomBackend(ModelBackend):
-    def authenticate(self, token=None, secret=None):
+    def authenticate(self, request=None, token=None, secret=None):
         try:
             user = User.objects.get(username=token)
             if user.check_password(secret):
