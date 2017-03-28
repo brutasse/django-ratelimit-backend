@@ -4,7 +4,10 @@ import warnings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:  # Django < 1.10
+    from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.utils import override_settings
 

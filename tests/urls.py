@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.conf.urls import url
 
 from ratelimitbackend import admin
 from ratelimitbackend.views import login
@@ -13,5 +13,5 @@ urlpatterns = [
         {'template_name': 'custom_login.html',
          'authentication_form': CustomAuthForm},
         name='custom_login'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 ]
