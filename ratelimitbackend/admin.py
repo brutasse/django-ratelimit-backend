@@ -32,3 +32,6 @@ class RateLimitAdminSite(AdminSite):  # noqa
 
 
 site = RateLimitAdminSite()
+
+for model, admin in django_site._registry.items():
+    site.register(model, admin.__class__)

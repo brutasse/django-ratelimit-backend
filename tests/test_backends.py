@@ -120,7 +120,9 @@ class RateLimitTests(TestCase):
             self.assertEqual(len(w), 1)
         url = reverse('admin:index')
         response = self.client.get(url)
-        self.assertContains(response, 'in the Auth')
+        self.assertContains(
+            response,
+            'Models in the Authentication and Authorization application')
         self.assertContains(response, '"/admin/auth/user/add/"')
 
     @override_settings(AUTHENTICATION_BACKENDS=('tests.backends.TestBackend',))
