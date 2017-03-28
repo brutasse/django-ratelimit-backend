@@ -1,5 +1,5 @@
 language: python
-python: 3.5
+python: 3.6
 sudo: false
 env:
   - TOXENV=py27-django18
@@ -14,6 +14,7 @@ env:
   - TOXENV=py35-django19
   - TOXENV=py35-django110
   - TOXENV=py35-django111
+  - TOXENV=py36-django111
   - TOXENV=docs
   - TOXENV=lint
 install:
