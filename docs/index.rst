@@ -28,7 +28,13 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
-* **1.1** (TBA):
+* **1.1.1** (2017-03-30):
+
+  * Run tests on Python 3.6.
+
+  * Run without warnings on supported Django versions.
+
+* **1.1** (2017-03-16):
 
   * Exclude tests from being installed from the wheel file.
 
