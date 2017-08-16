@@ -95,3 +95,7 @@ class RateLimitMixin(object):
 
 class RateLimitModelBackend(RateLimitMixin, ModelBackend):
     pass
+
+
+class RateLimitNoUsernameModelBackend(RateLimitModelBackend):
+    no_username = True
