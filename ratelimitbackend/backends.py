@@ -19,9 +19,16 @@ class RateLimitMixin(object):
     minutes = 5
     requests = 30
     username_key = 'username'
+    no_username = False
 
     def authenticate(self, request=None, **kwargs):
-        username = kwargs[self.username_key]
+        username = None
+        try:
+            username = kwargs[self.username_key]
+        except KeyError:
+            if not self.no_username:
+                raise
+
         if request is not None:
             counts = self.get_counters(request)
             if sum(counts.values()) >= self.requests:
