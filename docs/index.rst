@@ -28,6 +28,13 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **1.2** (2017-09-13):
+
+  * Add ``no_username`` attribute on authentication backend for token-based
+    authentication (Jody McIntyre).
+
+  * Fix Travis build for Python 3.3 (Jody McIntyre).
+
 * **1.1.1** (2017-03-30):
 
   * Run tests on Python 3.6.
