@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import warnings
 
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
 try:
@@ -188,3 +188,28 @@ class RateLimitTests(TestCase):
             'secret': 'suspicious attempt',
         }
         self.assertRaises(KeyError, self.client.post, url, wrong_data)
+
+    @override_settings(AUTHENTICATION_BACKENDS=(
+        'ratelimitbackend.backends.RateLimitNoUsernameModelBackend',))
+    def test_no_username_model_backend(self):
+        url = reverse('token_only_login')
+        wrong_data = {
+            'token': u'bad_token',
+        }
+        User.objects.create_user('foo', 'foo@bar.com', 'pass')
+
+        # Login succeeds normally
+        response = self.client.post(url, {'token': 'foo_pass'})
+        self.assertTrue(get_user(self.client).is_authenticated())
+
+        # 30 failed attempts are allowed
+        for iteration in range(30):
+            response = self.client.post(url, wrong_data)
+        self.assertContains(response, 'token')
+
+        response = self.client.post(url, wrong_data)
+        self.assertRateLimited(response)
+
+        # IP is rate-limited; even valid login attempts are blocked.
+        response = self.client.post(url, {'token': 'foo_pass'})
+        self.assertRateLimited(response)

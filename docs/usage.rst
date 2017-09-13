@@ -147,3 +147,10 @@ backend authenticates with an ``email``::
 
     class RateLimitedLCustomBackend(RateLimitMixin, CustomBackend):
         username_key = 'email'
+
+If your backend does not have the concept of a ``username`` at all,
+for example with OAuth 2 bearer token authentication, set the
+``no_username`` attribute on the backend class to ``True``.
+
+The ``RateLimitNoUsernameModelBackend`` can be used for this purpose
+if you don't need any additional customization.
