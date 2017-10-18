@@ -2,17 +2,8 @@ language: python
 python: 3.6
 sudo: false
 env:
-  - TOXENV=py27-django18
-  - TOXENV=py27-django19
-  - TOXENV=py27-django110
   - TOXENV=py27-django111
-  - TOXENV=py33-django18
-  - TOXENV=py34-django18
-  - TOXENV=py34-django19
-  - TOXENV=py34-django110
   - TOXENV=py34-django111
-  - TOXENV=py35-django19
-  - TOXENV=py35-django110
   - TOXENV=py35-django111
   - TOXENV=py36-django111
   - TOXENV=docs
@@ -26,5 +17,4 @@ addons:
     sources:
       - deadsnakes
     packages:
-      - python3.3
       - python3.5  # https://github.com/travis-ci/travis-ci/issues/4794

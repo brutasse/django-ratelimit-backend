@@ -1,8 +1,5 @@
 from django.http import HttpResponseForbidden
-try:
-    from django.utils.deprecation import MiddlewareMixin
-except ImportError:  # Django < 1.10
-    MiddlewareMixin = object
+from django.utils.deprecation import MiddlewareMixin
 
 from .exceptions import RateLimitException
 

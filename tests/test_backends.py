@@ -4,12 +4,9 @@ import warnings
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
-try:
-    from django.urls import reverse
-except ImportError:  # Django < 1.10
-    from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.utils import override_settings
+from django.urls import reverse
 
 
 class RateLimitTests(TestCase):
@@ -200,7 +197,7 @@ class RateLimitTests(TestCase):
 
         # Login succeeds normally
         response = self.client.post(url, {'token': 'foo_pass'})
-        self.assertTrue(get_user(self.client).is_authenticated())
+        self.assertTrue(get_user(self.client).is_authenticated)
 
         # 30 failed attempts are allowed
         for iteration in range(30):

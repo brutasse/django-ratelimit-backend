@@ -2,7 +2,6 @@
 import os
 import sys
 
-import django
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from django.utils.functional import empty
@@ -22,16 +21,6 @@ def setup_test_environment():
         'ratelimitbackend',
         'tests',
     ]
-
-    middleware_classes = [
-        'django.middleware.common.CommonMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'ratelimitbackend.middleware.RateLimitMiddleware',
-    ]
-
     settings_dict = {
         "DATABASES": {
             'default': {
@@ -45,7 +34,14 @@ def setup_test_environment():
             },
         },
         "ROOT_URLCONF": "tests.urls",
-        "MIDDLEWARE": middleware_classes,
+        "MIDDLEWARE": [
+            'django.middleware.common.CommonMiddleware',
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.contrib.messages.middleware.MessageMiddleware',
+            'django.contrib.auth.middleware.AuthenticationMiddleware',
+            'django.middleware.csrf.CsrfViewMiddleware',
+            'ratelimitbackend.middleware.RateLimitMiddleware',
+        ],
         "INSTALLED_APPS": apps,
         "SITE_ID": 1,
         "AUTHENTICATION_BACKENDS": (
@@ -76,10 +72,6 @@ def setup_test_environment():
             },
         }],
     }
-
-    if django.VERSION < (1, 10):
-        settings_dict["MIDDLEWARE_CLASSES"] = settings_dict["MIDDLEWARE"]
-
     # set up settings for running tests for all apps
     settings.configure(**settings_dict)
     from django import setup

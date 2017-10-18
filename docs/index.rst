@@ -28,6 +28,10 @@ Get involved, submit issues and pull requests on the `code repository`_!
 Changes
 -------
 
+* **2.0** (YYYY-MM-DD):
+
+  * Drop support for Django < 1.11.
+
 * **1.2** (2017-09-13):
 
   * Add ``no_username`` attribute on authentication backend for token-based
