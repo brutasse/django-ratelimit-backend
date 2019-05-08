@@ -12,7 +12,7 @@ Authentication backends
 .. class:: RateLimitMixin
 
     This is where the rate-limiting logic is implemented. Failed login
-    attempts are cached for 5 minutes and when the treshold is reached, the
+    attempts are cached for 5 minutes and when the threshold is reached, the
     remote IP is blocked whether its attempts are valid or not.
 
 .. attribute:: RateLimitMixin.cache_prefix
